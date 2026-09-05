@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher's Day Surprise</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background-color: #121212; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    
+    .phone-screen {
+      width: 100%; max-width: 400px; height: 90vh; max-height: 800px;
+      background-color: #fbf6ed; background-image: radial-gradient(#e8dfd4 1px, transparent 1px);
+      background-size: 20px 20px; border-radius: 20px; border: 8px solid #222;
+      position: relative; overflow: hidden; display: flex; flex-direction: column;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .page {
+      position: absolute; width: 100%; height: 100%; top: 0; left: 0;
+      padding: 30px 20px; display: none; flex-direction: column;
+      align-items: center; justify-content: space-between; text-align: center;
+      box-sizing: border-box;
+    }
+    .page.active { display: flex; }
+
+    h1 { color: #3f3a3b; font-size: 28px; font-weight: 700; margin-bottom: 5px; }
+    p.sub { color: #d46f8c; font-size: 14px; margin-bottom: 20px; }
+
+    .btn {
+      background-color: #f2275b; color: white; border: none; padding: 14px 28px;
+      border-radius: 25px; font-size: 16px; font-weight: 600; cursor: pointer;
+      box-shadow: 0 4px 12px rgba(242, 39, 91, 0.3); transition: transform 0.2s;
+      width: 80%; margin-bottom: 20px;
+    }
+    .btn:active { transform: scale(0.96); }
+
+    /* Page 0 */
+    .card-box {
+      background: #fffdfb; border-radius: 20px; padding: 30px 20px; width: 90%;
+      border: 1px solid #f0e7e1; box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+    .cute-img { width: 140px; height: 140px; margin: 20px 0; }
+
+    /* Page 1: Flip Cards Grid */
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 100%; margin-top: 10px; }
+    .flip-card { background-color: transparent; height: 150px; perspective: 1000px; cursor: pointer; }
+    .flip-card-inner {
+      position: relative; width: 100%; height: 100%; text-align: center;
+      transition: transform 0.6s; transform-style: preserve-3d;
+    }
+    .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
+    .card-front, .card-back {
+      position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
+      border-radius: 15px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; padding: 10px; box-sizing: border-box;
+    }
+    .c1 { background-color: #f9e1e6; }
+    .c2 { background-color: #d9f4e7; }
+    .c3 { background-color: #fff7d9; }
+    .c4 { background-color: #e5f1f8; }
+    .card-back { transform: rotateY(180deg); font-size: 13px; color: #3f3a3b; font-weight: 600; line-height: 1.4; }
+
+    /* Page 2: Letter */
+    .notebook {
+      background: #fffdfb; border-left: 2px dashed #f18aa2; width: 100%;
+      padding: 25px 20px; text-align: left; border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+    }
+    .notebook p { color: #70696a; font-size: 15px; line-height: 1.8; margin-bottom: 12px; }
+
+    /* Page 3: Blackboard Final */
+    .blackboard {
+      background: #2b3a30; border: 8px solid #8d5b42; border-radius: 12px;
+      padding: 30px 15px; color: white; width: 90%; box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+    .blackboard p { font-family: 'Comic Sans MS', cursive, sans-serif; font-size: 18px; line-height: 1.5; }
+  </style>
+</head>
+<body>
+
+<div class="phone-screen">
+  
+  <!-- Page 0: Intro -->
+  <div class="page active" id="p0">
+    <div style="height: 20px;"></div>
+    <div class="card-box">
+      <div style="color: #f3a5bb; font-size: 30px;">♡</div>
+      <h1>A little <span style="color:#ee5f80;">surprise</span></h1>
+      <h1>for you...</h1>
+      <svg class="cute-img" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="40" fill="#f8f7f4" stroke="#432d2f" stroke-width="3"/>
+        <ellipse cx="35" cy="45" rx="5" ry="7" fill="#432d2f"/>
+        <ellipse cx="65" cy="45" rx="5" ry="7" fill="#432d2f"/>
+        <path d="M 45 58 Q 50 63 55 58" fill="none" stroke="#432d2f" stroke-width="3"/>
+      </svg>
+      <p style="color: #d46f8c; font-weight: 600;">Class is about to begin ♥</p>
+    </div>
+    <button class="btn" onclick="nextPage(1)">Enter Class ›</button>
+  </div>
+
+  <!-- Page 1: Flip Cards -->
+  <div class="page" id="p1">
+    <div>
+      <h1>Today's Lesson</h1>
+      <p class="sub">Tap on a card to see what I learned</p>
+    </div>
+    
+    <div class="grid">
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="card-front c1">
+            <span style="font-size:24px;">♡</span>
+            <strong style="margin-top:10px;">kindness</strong>
+          </div>
+          <div class="card-back c1">You taught me that even the smallest things can mean so much.</div>
+        </div>
+      </div>
+
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="card-front c2">
+            <span style="font-size:24px;">🍃</span>
+            <strong style="margin-top:10px;">Patience</strong>
+          </div>
+          <div class="card-back c2">You taught me to understand, listen, and stay.</div>
+        </div>
+      </div>
+
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="card-front c3">
+            <span style="font-size:24px;">😊</span>
+            <strong style="margin-top:10px;">Happiness</strong>
+          </div>
+          <div class="card-back c3">You taught me that ordinary moments become my favorite memories.</div>
+        </div>
+      </div>
+
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-card-inner">
+          <div class="card-front c4">
+            <span style="font-size:24px;">🤝</span>
+            <strong style="margin-top:10px;">Us</strong>
+          </div>
+          <div class="card-back c4">You taught me what it feels like to have someone I can always look up to.</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn" onclick="nextPage(2)">One Last Lesson ›</button>
+  </div>
+
+  <!-- Page 2: Note Letter -->
+  <div class="page" id="p2">
+    <div>
+      <h1>One Last Lesson</h1>
+      <p class="sub">There's just one more thing I want to tell you...</p>
+    </div>
+
+    <div class="notebook">
+      <p><b>Thank you...</b></p>
+      <p>For being my teacher, my guide, and someone who always encouraged me.</p>
+      <p>You make every day better by believing in your students.</p>
+      <p>I'll carry your lessons with me long after the class is over.</p>
+      <p style="color:#e78aa1; font-weight:bold;">Always grateful. :)</p>
+    </div>
+
+    <button class="btn" onclick="nextPage(3)">End Class ›</button>
+  </div>
+
+  <!-- Page 3: Dismissed / Final -->
+  <div class="page" id="p3">
+    <h1 style="color:#ee5f80;">Class Dismissed.</h1>
+
+    <div class="blackboard">
+      <p><i>"Thank you for teaching, guiding, and inspiring me every day."</i></p>
+      <p style="text-align: right; margin-top: 15px; font-size: 14px;">~ Your Student</p>
+    </div>
+
+    <div style="background:#fffdfb; padding:15px; border-radius:15px; width:80%;">
+      <p style="color:#ee5f80; font-weight:bold;">Happy Teacher's Day</p>
+      <p style="color:#3f3a3b; font-size:18px; font-weight:bold;">Madam Jii 🌸</p>
+    </div>
+
+    <button class="btn" onclick="nextPage(0)">Replay ↺</button>
+  </div>
+
+</div>
+
+<script>
+  function nextPage(pageIndex) {
+    const pages = document.querySelectorAll('.page');
+    pages.forEach(p => p.classList.remove('active'));
+    document.getElementById('p' + pageIndex).classList.add('active');
+  }
+</script>
+
+</body>
+</html>
